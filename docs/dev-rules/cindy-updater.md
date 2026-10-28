@@ -90,3 +90,7 @@ IPC 返回。同一窗口重复点击共用进行中的检查；完成或失败�
 初始快照没有进度时保留不确定状态，不编造百分比。ready 后沿用原来的重启与忙碌任务
 确认入口，superseding 仍保留既有准备提示。`useUpdateStatus` 先订阅再读取初始快照，
 避免迟到的快照覆盖较新的事件。此展示不改变 main 的下载、校验、安装、自动重启或回滚条件。
+
+检查结束但无可下载更新（含清单失败）时，更新服务通过现有 `update-status` 广播 idle；
+下载失败时广播 error，并保留启动页使用的 `app-update-progress` 失败通知，避免侧栏
+停留在 checking/downloading。已有 ready 补丁的 superseding 失败仍恢复原 ready 状态。
